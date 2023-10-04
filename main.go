@@ -11,13 +11,18 @@ import (
 func main() {
 	loadEnv()
 	loadDatabase()
-
 }
 
 func loadDatabase() {
+	// Connect to the database
 	database.Connect()
-	database.Database.AutoMigrate(&model.User{})
-	database.Database.AutoMigrate(&model.Entry{})
+
+	// Perform database migrations
+	err := database.Database.AutoMigrate(&model.User{}, &model.Entry{})
+	if err != nil {
+		log.Fatal("Error performing database migrations:", err)
+	}
+
 }
 
 func loadEnv() {

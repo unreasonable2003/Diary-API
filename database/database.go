@@ -13,7 +13,7 @@ var Database *gorm.DB
 func Connect() {
 	var err error
 
-	dbURL := "postgres://unreasonable2003:rfj4LJm5nTpR@ep-bold-bread-62779844.ap-southeast-1.aws.neon.tech/neondb"
+	dbURL := "postgresql://unreasonable2003:rfj4LJm5nTpR@ep-bold-bread-62779844.ap-southeast-1.aws.neon.tech/neondb"
 
 	// Parse the URL
 	connector, err := pq.ParseURL(dbURL)
@@ -32,4 +32,26 @@ func Connect() {
 	} else {
 		fmt.Println("Successfully connected to the database")
 	}
+
+	// Check the database connection
+	err = pingDatabase(Database)
+	if err != nil {
+		panic(err)
+	}
+}
+
+// Function to ping the database to check the connection
+func pingDatabase(db *gorm.DB) error {
+	sqlDB, err := db.DB()
+	if err != nil {
+		return err
+	}
+
+	err = sqlDB.Ping()
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Connected to the database")
+	return nil
 }
