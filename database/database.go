@@ -13,7 +13,7 @@ var Database *gorm.DB
 func Connect() {
 	var err error
 
-	dbURL := "postgres://unreasonable2003:rfj4LJm5nTpR@ep-bold-bread-62779844.ap-southeast-1.aws.neon.tech/neondb"
+	dbURL := ""
 
 	// Parse the URL
 	connector, err := pq.ParseURL(dbURL)
