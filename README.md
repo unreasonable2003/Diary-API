@@ -1,7 +1,7 @@
 # Diary-API
 
 ### Introduction
-The Diary API is a user-centric application that enables individuals to create, manage, and access their personal diary entries. Users can register for an account, log in securely, and perform various actions related to diary management.
+The Diary API is a backend implementation for a user-centric application that enables individuals to create, manage, and access their personal diary entries. Users can register for an account, log in securely, and perform various actions related to diary management.
 The API is only meant for learning purpose, specifically Golang and gin framework. 
 
 ### Prerequisites
