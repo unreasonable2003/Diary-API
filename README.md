@@ -32,7 +32,7 @@ func Connect() {
 
 To execute the the API code, simply open the the folder in an IDE and run the following GO command in the terminal
 ```sh
-$ go run main.go
+go run main.go
 ```
 ### Articles about Gin
 
