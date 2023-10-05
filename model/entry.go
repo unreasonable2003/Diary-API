@@ -1,10 +1,22 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"diary_api/database"
 
-//entry model
+	"gorm.io/gorm"
+)
+
+// entry model
 type Entry struct {
 	gorm.Model
 	Content string `gorm:"type:text" json:"content"`
 	UserID  uint
+}
+
+func (entry *Entry) Save() (*Entry, error) {
+	err := database.Database.Create(&entry).Error
+	if err != nil {
+		return &Entry{}, err
+	}
+	return entry, nil
 }
