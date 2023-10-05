@@ -1,16 +1,21 @@
 package main
 
 import (
+	"diary_api/controller"
 	"diary_api/database"
 	"diary_api/model"
+	"fmt"
 	"log"
+	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
 func main() {
 	loadEnv()
 	loadDatabase()
+	serveApplication()
 }
 
 func loadDatabase() {
@@ -26,8 +31,24 @@ func loadDatabase() {
 }
 
 func loadEnv() {
-	err := godotenv.Load(".env.local")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+}
+
+func serveApplication() {
+	router := gin.Default()
+
+	publicRoutes := router.Group("/auth")
+
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{"message": "API is working"})
+	})
+
+	publicRoutes.POST("/register", controller.Register)
+	publicRoutes.POST("/login", controller.Login)
+
+	router.Run(":5000")
+	fmt.Println("Application running on port 5000")
 }
